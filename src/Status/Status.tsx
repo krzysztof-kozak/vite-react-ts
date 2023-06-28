@@ -8,9 +8,11 @@ interface StatusProps {
 export function Status({ nextMove, winner }: StatusProps) {
     return (
         <div className={styles.status}>
-            <p>
-                Next: <b>{nextMove}</b>
-            </p>
+            {!winner && (
+                <p>
+                    Next: <b>{nextMove}</b>
+                </p>
+            )}
 
             {winner && (
                 <p>
