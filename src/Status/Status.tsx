@@ -3,9 +3,10 @@ import styles from "./style.module.scss";
 interface StatusProps {
     nextMove: "X" | "O";
     winner: "X" | "O" | null;
+    onReset: () => void;
 }
 
-export function Status({ nextMove, winner }: StatusProps) {
+export function Status({ nextMove, winner, onReset }: StatusProps) {
     return (
         <div className={styles.status}>
             {!winner && (
@@ -15,9 +16,12 @@ export function Status({ nextMove, winner }: StatusProps) {
             )}
 
             {winner && (
-                <p>
-                    <b>{winner}</b> has won!
-                </p>
+                <>
+                    <p>
+                        <b>{winner}</b> has won!
+                    </p>
+                    <button onClick={onReset}>reset</button>
+                </>
             )}
         </div>
     );

@@ -27,6 +27,7 @@ function checkForWinner(squares: Square[]) {
             squares[indexA] === squares[indexC];
 
         winner = winnerFound ? squares[indexA] : null;
+        break;
     }
 
     return winner;
@@ -53,9 +54,19 @@ function App() {
         setWinner(winningSquare);
     };
 
+    const onGameReset = () => {
+        setSquares(Array(9).fill(null));
+        setXIsNext(false);
+        setWinner(null);
+    };
+
     return (
         <>
-            <Status winner={winner} nextMove={xIsNext ? "X" : "O"} />
+            <Status
+                winner={winner}
+                nextMove={xIsNext ? "X" : "O"}
+                onReset={onGameReset}
+            />
             <Board>
                 {squares.map((value, index) => {
                     return (
