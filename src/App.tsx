@@ -62,8 +62,13 @@ function App() {
 
     const onTimeTravel = (moveIndex: number) => {
         const newHistory = history.slice(0, moveIndex);
+
         setHistory(newHistory);
         setCurrentMove(moveIndex - 1);
+
+        if (winner) {
+            setWinner(null);
+        }
     };
 
     const squares = history[currentMove];
