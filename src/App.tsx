@@ -27,7 +27,7 @@ function checkForWinner(squares: Square[]) {
             squares[indexA] === squares[indexC];
 
         winner = winnerFound ? squares[indexA] : null;
-        break;
+        if (winner) break;
     }
 
     return winner;
@@ -39,6 +39,7 @@ function App() {
     const [squares, setSquares] = useState<Square[]>(Array(9).fill(null));
     const [xIsNext, setXIsNext] = useState(false);
     const [winner, setWinner] = useState<Square>(null);
+    const [history, setHistory] = useState<Square[][]>([Array(9).fill(null)]);
 
     const onSquareClick = (index: number) => {
         if (squares[index]) return;
