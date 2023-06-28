@@ -3,21 +3,17 @@ import style from "./style.module.scss";
 
 interface HistoryProps {
     history: Square[][];
-    setHistory: () => void;
+    onTimeTravel: (moveIndex: number) => void;
 }
 
-export function History({ history, setHistory }: HistoryProps) {
-    function handleTimeTravel(index: number, value: Square[]) {
-        return void 0;
-    }
-
+export function History({ history, onTimeTravel }: HistoryProps) {
     return (
         <ul className={style["move-list"]}>
-            {history.map((value, index) => {
-                return index > 0 ? (
-                    <li key={index}>
-                        <button onClick={() => handleTimeTravel(index, value)}>
-                            Go to move #{index}
+            {history.map((_squares, moveIndex) => {
+                return moveIndex > 0 ? (
+                    <li key={moveIndex}>
+                        <button onClick={() => onTimeTravel(moveIndex)}>
+                            Go to move #{moveIndex}
                         </button>
                     </li>
                 ) : null;

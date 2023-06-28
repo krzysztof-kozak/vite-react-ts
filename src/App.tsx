@@ -60,7 +60,13 @@ function App() {
         setCurrentMove(0);
     };
 
-    const squares = history[history.length - 1];
+    const onTimeTravel = (moveIndex: number) => {
+        const newHistory = history.slice(0, moveIndex);
+        setHistory(newHistory);
+        setCurrentMove(moveIndex - 1);
+    };
+
+    const squares = history[currentMove];
 
     return (
         <>
@@ -81,7 +87,7 @@ function App() {
                     );
                 })}
             </Board>
-            <History history={history} setHistory={() => void 0} />
+            <History history={history} onTimeTravel={onTimeTravel} />
         </>
     );
 }
