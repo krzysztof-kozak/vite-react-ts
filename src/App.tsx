@@ -36,38 +36,37 @@ function checkForWinner(squares: Square[]) {
 export type Square = null | "X" | "O";
 
 function App() {
-    const [squares, setSquares] = useState<Square[]>(Array(9).fill(null));
-    const [xIsNext, setXIsNext] = useState(false);
-    const [winner, setWinner] = useState<Square>(null);
     const [history, setHistory] = useState<Square[][]>([Array(9).fill(null)]);
+    const [currentMove, setCurrentMove] = useState(0);
+    const [winner, setWinner] = useState<Square>(null);
 
     const onSquareClick = (index: number) => {
-        if (squares[index]) return;
+        if (history[currentMove][index]) return;
         if (winner) return;
 
         const nextSquares = [...squares];
-        nextSquares[index] = xIsNext ? "X" : "O";
+        nextSquares[index] = currentMove % 2 === 0 ? "O" : "X";
+        setCurrentMove((move) => move + 1);
 
-        setSquares(nextSquares);
         setHistory([...history, nextSquares]);
-        setXIsNext((v) => !v);
 
         const winningSquare = checkForWinner(nextSquares);
         setWinner(winningSquare);
     };
 
     const onGameReset = () => {
-        setSquares(Array(9).fill(null));
-        setXIsNext(false);
-        setWinner(null);
         setHistory([Array(9).fill(null)]);
+        setWinner(null);
+        setCurrentMove(0);
     };
+
+    const squares = history[history.length - 1];
 
     return (
         <>
             <Status
                 winner={winner}
-                nextMove={xIsNext ? "X" : "O"}
+                nextMove={currentMove % 2 === 0 ? "O" : "X"}
                 onReset={onGameReset}
             />
             <Board>
@@ -82,7 +81,7 @@ function App() {
                     );
                 })}
             </Board>
-            <History history={history} />
+            <History history={history} setHistory={() => void 0} />
         </>
     );
 }
