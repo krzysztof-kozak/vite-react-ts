@@ -1,0 +1,11 @@
+.move-list {
+  margin-top: 3rem;
+  display: grid;
+  row-gap: 0.75rem;
+
+  button {
+    padding-block: 0.2rem;
+    padding-inline: 0.6rem;
+    border-radius: 4px;
+  }
+}
