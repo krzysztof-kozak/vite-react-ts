@@ -87,7 +87,11 @@ function App() {
                     );
                 })}
             </Board>
-            <History history={history} onTimeTravel={onTimeTravel} />
+            <History
+                history={history}
+                onTimeTravel={onTimeTravel}
+                currentMove={currentMove}
+            />
         </>
     );
 }
