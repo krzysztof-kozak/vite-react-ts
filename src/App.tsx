@@ -33,7 +33,7 @@ function checkForWinner(squares: Square[]) {
     return winner;
 }
 
-type Square = null | "X" | "O";
+export type Square = null | "X" | "O";
 
 function App() {
     const [squares, setSquares] = useState<Square[]>(Array(9).fill(null));
@@ -49,6 +49,7 @@ function App() {
         nextSquares[index] = xIsNext ? "X" : "O";
 
         setSquares(nextSquares);
+        setHistory([...history, nextSquares]);
         setXIsNext((v) => !v);
 
         const winningSquare = checkForWinner(nextSquares);
@@ -59,6 +60,7 @@ function App() {
         setSquares(Array(9).fill(null));
         setXIsNext(false);
         setWinner(null);
+        setHistory([Array(9).fill(null)]);
     };
 
     return (
@@ -80,7 +82,7 @@ function App() {
                     );
                 })}
             </Board>
-            <History />
+            <History history={history} />
         </>
     );
 }

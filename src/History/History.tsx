@@ -1,27 +1,20 @@
+import { Square } from "../App";
 import style from "./style.module.scss";
 
-export function History() {
+interface HistoryProps {
+    history: Square[][];
+}
+
+export function History({ history }: HistoryProps) {
     return (
         <ul className={style["move-list"]}>
-            <li>
-                <button>Go to move #1</button>
-            </li>
-
-            <li>
-                <button>Go to move #2</button>
-            </li>
-
-            <li>
-                <button>Go to move #3</button>
-            </li>
-
-            <li>
-                <button>Go to move #4</button>
-            </li>
-
-            <li>
-                <button>Go to move #5</button>
-            </li>
+            {history.map((_value, index) => {
+                return index > 0 ? (
+                    <li key={index}>
+                        <button>Go to move #{index}</button>
+                    </li>
+                ) : null;
+            })}
         </ul>
     );
 }
